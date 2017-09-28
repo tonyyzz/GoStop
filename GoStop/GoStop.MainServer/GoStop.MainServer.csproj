@@ -46,7 +46,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="net\TcpPackServerMnger.cs" />
-    <Compile Include="net\WebSocketServerMnger.cs" />
+    <Compile Include="net\MainWebSocketServerMnger.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />

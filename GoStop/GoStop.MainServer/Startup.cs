@@ -7,14 +7,18 @@ using System.Threading.Tasks;
 
 namespace GoStop.MainServer
 {
-public	class Startup
+	public class Startup
 	{
 		public static void Run()
 		{
-			Log.ConsoleWrite("------------【GoStop服务器正在启动...】-------------------");
-			string wsAddress = "127.0.0.1";
-			ushort wsPort = 50006;
-			WebSocketServerMnger.GetInstance().Start(wsAddress, wsPort);
+			Log.ConsoleWrite("------------【GoStop主服务器正在启动...】-------------------");
+			string mainWsAddress = "127.0.0.1";
+			ushort mainWsPort = 50006;
+			MainWebSocketServerMnger.GetInstance().Start(mainWsAddress, mainWsPort);
+
+			string tcpPackAddress = "127.0.0.1";
+			ushort tcpPackPort = 50007;
+			TcpPackServerMnger.GetInstance().Start(tcpPackAddress, tcpPackPort);
 		}
 	}
 }

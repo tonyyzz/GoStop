@@ -13,7 +13,7 @@ namespace GoStop.SubServer
 		{
 			Log.ConsoleWrite("------------【GoStop子服务器正在启动...】-------------------");
 			string tcpPackAddress = "127.0.0.1";
-			ushort TcpPackPort = 50006;
+			ushort TcpPackPort = 50007;
 			TcpPackClientMnger.GetInstance().Connect(tcpPackAddress, TcpPackPort);
 		}
 	}

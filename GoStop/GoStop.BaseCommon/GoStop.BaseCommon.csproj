@@ -58,6 +58,7 @@
     <Compile Include="package\PackageManage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ServerPlayer.cs" />
+    <Compile Include="utils\IPAddressUtils.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

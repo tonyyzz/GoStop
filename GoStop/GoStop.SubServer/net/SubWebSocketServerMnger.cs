@@ -12,12 +12,12 @@ namespace GoStop.MainServer
 		public byte[] buffer = null;
 		public int bufferLen = 0;
 	}
-	public class WebSocketServerMnger
+	public class SubWebSocketServerMnger
 	{
-		private static WebSocketServerMnger Instance = null;
-		private WebSocketServerMnger() { }
+		private static SubWebSocketServerMnger Instance = null;
+		private SubWebSocketServerMnger() { }
 		private readonly static object obj = new object();
-		public static WebSocketServerMnger GetInstance()
+		public static SubWebSocketServerMnger GetInstance()
 		{
 			if (Instance == null)
 			{
@@ -25,7 +25,7 @@ namespace GoStop.MainServer
 				{
 					if (Instance == null)
 					{
-						Instance = new WebSocketServerMnger();
+						Instance = new SubWebSocketServerMnger();
 					}
 				}
 			}
@@ -35,10 +35,10 @@ namespace GoStop.MainServer
 
 		private WebSocketServer wsServer = null;
 
-		private const string clsName = "WebSocketServerMnger";
+		private const string clsName = "SubWebSocketServerMnger";
 		private int maxBufferSize = 1024;
 
-		public void Start(string bindAddress, ushort port)
+		public bool Start(string bindAddress, ushort port)
 		{
 			wsServer = new WebSocketServer
 			{
@@ -51,16 +51,18 @@ namespace GoStop.MainServer
 			wsServer.OnClose += new TcpServerEvent.OnCloseEventHandler(OnClose);
 			wsServer.OnShutdown += new TcpServerEvent.OnShutdownEventHandler(OnShutdown);
 
-			if (wsServer.Start())
+			var flag = wsServer.Start();
+			if (flag)
 			{
 				Log.WriteInfo(string.Format("" + clsName + " Start OK -> ({0}:{1})",
-					wsServer.IpAddress, port));
+					wsServer.IpAddress, wsServer.Port));
 			}
 			else
 			{
 				Log.WriteError(string.Format("" + clsName + " Start Error -> ({0}:{1})",
 					wsServer.ErrorMessage, wsServer.ErrorCode));
 			}
+			return flag;
 		}
 
 		private HandleResult OnAccept(IntPtr connId, IntPtr pClient)

@@ -3,6 +3,7 @@ using HPSocketCS;
 using System;
 using System.Linq;
 using System.Net;
+using System.Text;
 
 namespace GoStop.MainServer
 {
@@ -27,14 +28,16 @@ namespace GoStop.MainServer
 		}
 
 		private TcpPackServer server = null;
-		private const string clsName = "TcpServerManager";
+		private const string clsName = "TcpPackServerMnger";
 
-		public TcpPackServerMnger Start()
+		public TcpPackServerMnger Start(string bindAddress, ushort port)
 		{
-			server = new TcpPackServer();
-			server.PackHeaderFlag = 0x2c;
-			//server.IpAddress = IPAddress.Any.ToString();
-			//server.Port = port;
+			server = new TcpPackServer
+			{
+				PackHeaderFlag = 0x2d,
+				IpAddress = bindAddress,
+				Port = port
+			};
 
 			server.OnAccept += new TcpServerEvent.OnAcceptEventHandler(OnAccept);
 			server.OnReceive += new TcpServerEvent.OnReceiveEventHandler(OnReceive);
@@ -44,7 +47,7 @@ namespace GoStop.MainServer
 			if (server.Start())
 			{
 				Log.WriteInfo(string.Format("" + clsName + " Start OK -> ({0}:{1})",
-					server.IpAddress, 0));
+					server.IpAddress, server.Port));
 			}
 			else
 			{
@@ -55,8 +58,7 @@ namespace GoStop.MainServer
 		}
 		private HandleResult OnAccept(IntPtr connId, IntPtr pClient)
 		{
-			// 客户进入了
-			// 获取客户端ip和端口
+			//获取客户端ip和端口
 			string ip = string.Empty;
 			ushort port = 0;
 			if (server.GetRemoteAddress(connId, ref ip, ref port))
@@ -86,53 +88,56 @@ namespace GoStop.MainServer
 		}
 		private HandleResult OnReceive(IntPtr connId, byte[] bytes)
 		{
-			//接收数据
-			try
-			{
-				var session = server.GetExtra<Session>(connId);
-				if (session != null)
-				{
-					Log.WriteInfo(string.Format("" + clsName + " - > [{0},OnReceive] -> {1}:{2} ({3} bytes)",
-						session.ConnId, session.IpAddress, session.Port, bytes.Length));
-				}
-				else
-				{
-					Log.WriteInfo(string.Format("" + clsName + " - session = null > [{0},OnReceive] -> ({1} bytes)",
-						connId, bytes.Length));
-				}
-				//处理数据
-				//数据解密
-				CustomDE.Decrypt(bytes, 0, bytes.Length);
-				int len = bytes.Count(); //数据长度
-				short mainid = BitConverter.ToInt16(bytes, 0); //主协议
-				short secondid = BitConverter.ToInt16(bytes, 2); //次协议
-				Console.WriteLine("" + clsName + " : ----package log: 【{0}】正在调用主协议为【{1}】，次协议为【{2}】的接口",
-					DateTime.Now.ToString("HH:mm:ss"), mainid, secondid);
-				Package pack = PackageManage.Instance.NewPackage(mainid, secondid);
-				if (pack == null)
-				{
-					throw new Exception(
-						string.Format("主协议为【{0}】，次协议为【{1}】的包体不存在或者还未注册",
-						mainid, secondid));
-				}
-				pack.Write(bytes, len);
-				pack.ReadHead();
-				pack.SetSession(session);
-				try
-				{
-					pack.Excute();
-				}
-				catch (Exception ex)
-				{
-					Log.WriteError(ex);
-				}
-				return HandleResult.Ok;
-			}
-			catch (Exception ex)
-			{
-				Log.WriteError(ex);
-				return HandleResult.Ignore;
-			}
+			string data = Encoding.UTF8.GetString(bytes);
+			int c = 0;
+			////接收数据
+			//try
+			//{
+			//	var session = server.GetExtra<Session>(connId);
+			//	if (session != null)
+			//	{
+			//		Log.WriteInfo(string.Format("" + clsName + " - > [{0},OnReceive] -> {1}:{2} ({3} bytes)",
+			//			session.ConnId, session.IpAddress, session.Port, bytes.Length));
+			//	}
+			//	else
+			//	{
+			//		Log.WriteInfo(string.Format("" + clsName + " - session = null > [{0},OnReceive] -> ({1} bytes)",
+			//			connId, bytes.Length));
+			//	}
+			//	//处理数据
+			//	//数据解密
+			//	CustomDE.Decrypt(bytes, 0, bytes.Length);
+			//	int len = bytes.Count(); //数据长度
+			//	short mainid = BitConverter.ToInt16(bytes, 0); //主协议
+			//	short secondid = BitConverter.ToInt16(bytes, 2); //次协议
+			//	Console.WriteLine("" + clsName + " : ----package log: 【{0}】正在调用主协议为【{1}】，次协议为【{2}】的接口",
+			//		DateTime.Now.ToString("HH:mm:ss"), mainid, secondid);
+			//	Package pack = PackageManage.Instance.NewPackage(mainid, secondid);
+			//	if (pack == null)
+			//	{
+			//		throw new Exception(
+			//			string.Format("主协议为【{0}】，次协议为【{1}】的包体不存在或者还未注册",
+			//			mainid, secondid));
+			//	}
+			//	pack.Write(bytes, len);
+			//	pack.ReadHead();
+			//	pack.SetSession(session);
+			//	try
+			//	{
+			//		pack.Excute();
+			//	}
+			//	catch (Exception ex)
+			//	{
+			//		Log.WriteError(ex);
+			//	}
+			//	return HandleResult.Ok;
+			//}
+			//catch (Exception ex)
+			//{
+			//	Log.WriteError(ex);
+			//	return HandleResult.Ignore;
+			//}
+			return HandleResult.Ok;
 		}
 
 		private HandleResult OnClose(IntPtr connId, SocketOperation enOperation, int errorCode)
