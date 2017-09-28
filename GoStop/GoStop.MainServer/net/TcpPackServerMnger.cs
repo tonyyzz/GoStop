@@ -88,55 +88,51 @@ namespace GoStop.MainServer
 		}
 		private HandleResult OnReceive(IntPtr connId, byte[] bytes)
 		{
-			string data = Encoding.UTF8.GetString(bytes);
-			int c = 0;
-			////接收数据
-			//try
-			//{
-			//	var session = server.GetExtra<Session>(connId);
-			//	if (session != null)
-			//	{
-			//		Log.WriteInfo(string.Format("" + clsName + " - > [{0},OnReceive] -> {1}:{2} ({3} bytes)",
-			//			session.ConnId, session.IpAddress, session.Port, bytes.Length));
-			//	}
-			//	else
-			//	{
-			//		Log.WriteInfo(string.Format("" + clsName + " - session = null > [{0},OnReceive] -> ({1} bytes)",
-			//			connId, bytes.Length));
-			//	}
-			//	//处理数据
-			//	//数据解密
-			//	CustomDE.Decrypt(bytes, 0, bytes.Length);
-			//	int len = bytes.Count(); //数据长度
-			//	short mainid = BitConverter.ToInt16(bytes, 0); //主协议
-			//	short secondid = BitConverter.ToInt16(bytes, 2); //次协议
-			//	Console.WriteLine("" + clsName + " : ----package log: 【{0}】正在调用主协议为【{1}】，次协议为【{2}】的接口",
-			//		DateTime.Now.ToString("HH:mm:ss"), mainid, secondid);
-			//	Package pack = PackageManage.Instance.NewPackage(mainid, secondid);
-			//	if (pack == null)
-			//	{
-			//		throw new Exception(
-			//			string.Format("主协议为【{0}】，次协议为【{1}】的包体不存在或者还未注册",
-			//			mainid, secondid));
-			//	}
-			//	pack.Write(bytes, len);
-			//	pack.ReadHead();
-			//	pack.SetSession(session);
-			//	try
-			//	{
-			//		pack.Excute();
-			//	}
-			//	catch (Exception ex)
-			//	{
-			//		Log.WriteError(ex);
-			//	}
-			//	return HandleResult.Ok;
-			//}
-			//catch (Exception ex)
-			//{
-			//	Log.WriteError(ex);
-			//	return HandleResult.Ignore;
-			//}
+			//接收数据
+			try
+			{
+				var session = server.GetExtra<Session>(connId);
+				if (session == null)
+				{
+					Log.WriteInfo(string.Format("" + clsName + " - session = null > [{0},OnReceive] -> ({1} bytes)",
+						connId, bytes.Length));
+					return HandleResult.Error;
+				}
+				Log.WriteInfo(string.Format("" + clsName + " - > [{0},OnReceive] -> {1}:{2} ({3} bytes)",
+					session.ConnId, session.IpAddress, session.Port, bytes.Length));
+				//处理数据
+				//数据解密
+				CustomDE.Decrypt(bytes, 0, bytes.Length);
+				int len = bytes.Count(); //数据长度
+				short mainid = BitConverter.ToInt16(bytes, 4); //主协议
+				short secondid = BitConverter.ToInt16(bytes, 6); //次协议
+				Console.WriteLine("" + clsName + " : ----package log: 【{0}】正在调用主协议为【{1}】，次协议为【{2}】的接口",
+					DateTime.Now.ToString("HH:mm:ss"), mainid, secondid);
+				Package pack = PackageManage.Instance.NewPackage(mainid, secondid);
+				if (pack == null)
+				{
+					throw new Exception(
+						string.Format("主协议为【{0}】，次协议为【{1}】的包体不存在或者还未注册",
+						mainid, secondid));
+				}
+				pack.Write(bytes, len);
+				pack.ReadHead();
+				pack.SetSession(session);
+				try
+				{
+					pack.Excute();
+				}
+				catch (Exception ex)
+				{
+					Log.WriteError(ex);
+					return HandleResult.Error;
+				}
+			}
+			catch (Exception ex)
+			{
+				Log.WriteError(ex);
+				return HandleResult.Ignore;
+			}
 			return HandleResult.Ok;
 		}
 
@@ -153,22 +149,17 @@ namespace GoStop.MainServer
 					connId, enOperation, errorCode));
 			}
 			var session = server.GetExtra<Session>(connId);
-			//if (session != null && session.player != null)
-			//{
-			//	PlayerModel player = session.player as PlayerModel;
-			//	if (player != null)
-			//	{
-			//		Console.WriteLine(string.Format(@" tcp - -------------玩家【{0}】在【{1}】时下线----------------", player.Id, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")));
-			//		player.Offline();//玩家下线
-			//	}
-			//	session = null;
-			//	//移除该玩家与客户端的通信
-			//	if (!server.RemoveExtra(connId))
-			//	{
-			//		Log.WriteInfo(string.Format(" tcp - > [{0},OnClose] -> SetConnectionExtra({0}, null) fail",
-			//			connId));
-			//	}
-			//}
+			if (session != null)
+			{
+				SubServerMnger.subServerList.RemoveAll(m => m.tcpAddress == session.IpAddress && m.tcpPort == session.Port);
+				session = null;
+				//移除该玩家与客户端的通信
+				if (!server.RemoveExtra(connId))
+				{
+					Log.WriteInfo(string.Format("" + clsName + " - > [{0},OnClose] -> SetConnectionExtra({0}, null) fail",
+						connId));
+				}
+			}
 			return HandleResult.Ok;
 		}
 

@@ -9,6 +9,9 @@ using System.Threading.Tasks;
 
 namespace GoStop.SubServer
 {
+	/// <summary>
+	/// 与主服务器通信
+	/// </summary>
 	public class TcpPackClientMnger
 	{
 		private static TcpPackClientMnger Instance = null;
@@ -58,17 +61,20 @@ namespace GoStop.SubServer
 			//连接主服务器成功后，启动WebSocket子服务器
 			string subWsAddress = "127.0.0.1";
 			ushort subWsPort = 50008;
-			bool isOnline = true;
+			bool isOnline = false;
 			var flag = SubWebSocketServerMnger.GetInstance().Start(subWsAddress, subWsPort);
-			if (flag)
+			if (flag) //WsSocket启动成功后，将wsSocket的IPAddress上传至主服务器
 			{
-				string transmitAddress = subWsAddress;
-				ushort transmitPort = subWsPort;
+				string wsTransmitAddress = subWsAddress;
+				ushort wsTransmitPort = subWsPort;
 				if (isOnline) //如果是线上，则获取外网ip
 				{
-					transmitAddress = IPAddressUtils.GetOuterNatIP();
+					wsTransmitAddress = IPAddressUtils.GetOuterNatIP();
 				}
-				Send(Encoding.UTF8.GetBytes(transmitAddress));
+				Package pack = new Package(MainCommand.MC_SUBSERVER, SecondCommand.SC_SUBSERVER_uploadWsIpAddress);
+				pack.Write(wsTransmitAddress);
+				pack.Write(wsTransmitPort);
+				Send(pack);
 			}
 			return HandleResult.Ok;
 		}
@@ -83,9 +89,14 @@ namespace GoStop.SubServer
 			return HandleResult.Ok;
 		}
 
-		public void Send(byte[] data)
+		public void Send(Package pack)
 		{
-			tcpPackClient.Send(data, data.Length);
+			byte[] bytes = pack.GetBuffer();
+			int len = pack.getLen();
+			byte[] bytes_tmp = new byte[len];
+			Array.Copy(bytes, 0, bytes_tmp, 0, len);
+			CustomDE.Encrypt(bytes_tmp, 0, bytes_tmp.Length);
+			tcpPackClient.Send(bytes_tmp, bytes_tmp.Length);
 		}
 	}
 }

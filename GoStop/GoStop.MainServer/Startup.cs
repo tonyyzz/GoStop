@@ -12,6 +12,9 @@ namespace GoStop.MainServer
 		public static void Run()
 		{
 			Log.ConsoleWrite("------------【GoStop主服务器正在启动...】-------------------");
+
+			PackageConfig.Register();
+
 			string mainWsAddress = "127.0.0.1";
 			ushort mainWsPort = 50006;
 			MainWebSocketServerMnger.GetInstance().Start(mainWsAddress, mainWsPort);

@@ -11,9 +11,9 @@ namespace GoStop.BaseCommon
 		/// </summary>
 		MC_ERROR = 0,
 		/// <summary>
-		/// 账号
+		/// 子服务期
 		/// </summary>
-		MC_ACCOUNT = 1,
+		MC_SUBSERVER = 1,
 		
 	}
 	public enum SecondCommand //不要超过 32767 因为会溢出，会和short转换
@@ -22,9 +22,8 @@ namespace GoStop.BaseCommon
 		SC_ERROR_hall = 1, //大厅服务器错误
 		#endregion
 
-		#region 账户相关
-		SC_ACCOUNT_login = 100, //登录
-		SC_ACCOUNT_login_ret = 101,
+		#region 子服务器相关
+		SC_SUBSERVER_uploadWsIpAddress = 10,
 		
 		#endregion
 

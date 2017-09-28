@@ -74,11 +74,11 @@ namespace GoStop.MainServer
 			ushort port = 0;
 			if (wsServer.GetRemoteAddress(connId, ref ip, ref port))
 			{
-				Log.WriteInfo(string.Format(" > [{0},OnAccept] -> PASS({1}:{2})", connId, ip.ToString(), port));
+				Log.WriteInfo(string.Format("" + clsName + " > [{0},OnAccept] -> PASS({1}:{2})", connId, ip.ToString(), port));
 			}
 			else
 			{
-				Log.WriteInfo(string.Format(" > [{0},OnAccept] -> Server_GetClientAddress() Error", connId));
+				Log.WriteInfo(string.Format("" + clsName + " > [{0},OnAccept] -> Server_GetClientAddress() Error", connId));
 			}
 			// 设置附加数据
 			MySession session = new MySession();
@@ -91,7 +91,7 @@ namespace GoStop.MainServer
 
 			if (!wsServer.SetExtra(connId, session))
 			{
-				Log.WriteInfo(string.Format(" > [{0},OnAccept] -> SetConnectionExtra fail", connId));
+				Log.WriteInfo(string.Format("" + clsName + " > [{0},OnAccept] -> SetConnectionExtra fail", connId));
 				return HandleResult.Ignore;
 			}
 
@@ -114,9 +114,9 @@ namespace GoStop.MainServer
 			Log.ConsoleWrite("--------------OnClose");
 			//客户端关闭连接
 			if (errorCode == 0)
-				Log.WriteInfo(string.Format(" > [{0},OnClose]", connId));
+				Log.WriteInfo(string.Format("" + clsName + " > [{0},OnClose]", connId));
 			else
-				Log.WriteInfo(string.Format(" > [{0},OnError] -> OP:{1},CODE:{2}", connId, enOperation, errorCode));
+				Log.WriteInfo(string.Format("" + clsName + " > [{0},OnError] -> OP:{1},CODE:{2}", connId, enOperation, errorCode));
 			// return HPSocketSdk.HandleResult.Ok;
 			//MySession session = wsServer.GetExtra<MySession>(connId);
 			//try
@@ -167,191 +167,5 @@ namespace GoStop.MainServer
 			Log.WriteInfo(" > [OnShutdown]");
 			return HandleResult.Ok;
 		}
-
-		//private HandleResult WsServer_OnSend(IntPtr connId, byte[] bytes)
-		//{
-		//	Log.ConsoleWrite("--------------WsServer_OnSend");
-		//	string str = Encoding.UTF8.GetString(bytes);
-		//	return HandleResult.Ok;
-		//}
-
-		//private HandleResult WsServer_OnPrepareListen(IntPtr soListen)
-		//{
-		//	Log.ConsoleWrite("--------------WsServer_OnPrepareListen");
-		//	return HandleResult.Ok;
-		//}
-
-		//private HandleResult WsServer_OnPointerDataReceive(IntPtr connId, IntPtr pData, int length)
-		//{
-		//	Log.ConsoleWrite("--------------WsServer_OnPointerDataReceive");
-		//	return HandleResult.Ok;
-		//}
-
-		//private HttpParseResult WsServer_OnPointerDataBody(IntPtr connId, IntPtr pData, int length)
-		//{
-		//	Log.ConsoleWrite("--------------WsServer_OnPointerDataBody");
-		//	return HttpParseResult.Ok;
-		//}
-
-		//private HttpParseResult WsServer_OnMessageBegin(IntPtr connId)
-		//{
-		//	Log.ConsoleWrite("--------------WsServer_OnMessageBegin");
-		//	return HttpParseResult.Ok;
-		//}
-
-		//private HttpParseResult WsServer_OnHeader(IntPtr connId, string name, string value)
-		//{
-		//	Log.ConsoleWrite("--------------WsServer_OnHeader");
-		//	return HttpParseResult.Ok;
-		//}
-
-		//private HandleResult WsServer_OnClose(IntPtr connId, SocketOperation enOperation, int errorCode)
-		//{
-		//	Log.ConsoleWrite("--------------WsServer_OnClose");
-		//	return HandleResult.Ok;
-		//}
-
-		//private HttpParseResult WsServer_OnChunkHeader(IntPtr connId, int length)
-		//{
-		//	Log.ConsoleWrite("--------------WsServer_OnChunkHeader");
-		//	return HttpParseResult.Ok;
-		//}
-
-		//private HttpParseResult WsServer_OnChunkComplete(IntPtr connId)
-		//{
-		//	Log.ConsoleWrite("--------------WsServer_OnChunkComplete");
-		//	return HttpParseResult.Ok;
-		//}
-
-		//private HandleResult WsServer_OnAccept(IntPtr connId, IntPtr pClient)
-		//{
-		//	Log.ConsoleWrite("--------------WsServer_OnAccept");
-		//	string ip = string.Empty;
-		//	ushort port = 0;
-		//	if (wsServer.GetRemoteAddress(connId, ref ip, ref port))
-		//	{
-		//		Log.WriteInfo(string.Format("" + clsName + "- > [{0},OnAccept] -> PASS({1}:{2})",
-		//			connId, ip.ToString(), port));
-		//	}
-		//	else
-		//	{
-		//		Log.WriteInfo(string.Format("" + clsName + " - > [{0},OnAccept] -> Server_GetAddress() Error",
-		//			connId));
-		//		return HandleResult.Error;
-		//	}
-		//	//设置附加数据，保存用户连接，用来与客户端通信
-		//	Session session = new Session
-		//	{
-		//		ConnId = connId,
-		//		IpAddress = ip,
-		//		Port = port,
-		//		player = null
-		//	};
-		//	//设置
-		//	if (!wsServer.SetExtra(connId, session))
-		//	{
-		//		Log.WriteInfo(string.Format("" + clsName + "- > [{0},OnAccept] -> SetConnectionExtra fail", connId));
-		//		return HandleResult.Error;
-		//	}
-		//	Console.WriteLine("处理WsServer_OnAccept完成");
-		//	return HandleResult.Ok;
-		//}
-
-		//private HandleResult WsServer_OnHandShake(IntPtr connId)
-		//{
-		//	Log.ConsoleWrite("--------------WsServer_OnHandShake");
-		//	var data = Encoding.UTF8.GetBytes("测试数据");
-		//	var state = wsServer.GetWSMessageState(connId);
-		//	if (state != null)
-		//	{
-		//		// 原样返回给客户端
-		//		wsServer.SendWSMessage(connId, state, data);
-		//	}
-		//	return HandleResult.Ok;
-		//}
-
-		//private HandleResult WsServer_OnReceive(IntPtr connId, byte[] bytes)
-		//{
-		//	Log.ConsoleWrite("--------------WsServer_OnReceive");
-		//	return HandleResult.Ok;
-		//}
-
-		//private HttpParseResult WsServer_OnUpgrade(IntPtr connId, HttpUpgradeType upgradeType)
-		//{
-		//	Log.ConsoleWrite("--------------WsServer_OnUpgrade");
-		//	return HttpParseResult.Ok;
-		//}
-
-		//private HttpParseResult WsServer_OnParseError(IntPtr connId, int errorCode, string errorDesc)
-		//{
-		//	Log.ConsoleWrite("--------------WsServer_OnParseError");
-		//	Log.ConsoleWrite(errorCode.ToString());
-		//	return HttpParseResult.Ok;
-		//}
-
-		//private HttpParseResultEx WsServer_OnHeadersComplete(IntPtr connId)
-		//{
-		//	Log.ConsoleWrite("--------------WsServer_OnHeadersComplete");
-		//	return HttpParseResultEx.Ok;
-		//}
-
-		//private HttpParseResult WsServer_OnMessageComplete(IntPtr connId)
-		//{
-		//	Log.ConsoleWrite("--------------WsServer_OnMessageComplete");
-		//	return HttpParseResult.Ok;
-		//}
-
-		//private HttpParseResult WsServer_OnBody(IntPtr connId, byte[] bytes)
-		//{
-		//	Log.ConsoleWrite("--------------WsServer_OnBody");
-		//	return HttpParseResult.Ok;
-		//}
-
-		//private HandleResult WsServer_OnPointerWSMessageBody(IntPtr connId, IntPtr pData, int length)
-		//{
-		//	Log.ConsoleWrite("--------------WsServer_OnPointerWSMessageBody");
-		//	return HandleResult.Ok;
-		//}
-
-		//private HandleResult WsServer_OnWSMessageBody(IntPtr connId, byte[] data)
-		//{
-		//	Log.ConsoleWrite("--------------WsServer_OnWSMessageBody");
-		//	// 如果是文本,应该用utf8编码
-		//	string str = Encoding.UTF8.GetString(data);
-		//	Console.WriteLine("OnWSMessageBody() -> {0}", str);
-
-		//	//// 获取客户端的state
-		//	//var state = wsServer.GetWSMessageState(connId);
-		//	//if (state != null)
-		//	//{
-		//	//	// 原样返回给客户端
-		//	//	wsServer.SendWSMessage(connId, state, data);
-		//	//}
-		//	return HandleResult.Ok;
-		//}
-		//private HandleResult WsServer_OnWSMessageComplete(IntPtr connId)
-		//{
-		//	Log.ConsoleWrite("--------------WsServer_OnWSMessageComplete");
-		//	var buffer = Encoding.UTF8.GetBytes("测试数据");
-		//	wsServer.Send(connId, buffer, buffer.Length);
-		//	return HandleResult.Ok;
-		//}
-		//private HandleResult WsServer_OnWSMessageHeader(IntPtr connId, bool final, byte reserved, byte operationCode, byte[] mask, ulong bodyLength)
-		//{
-		//	Log.ConsoleWrite("--------------WsServer_OnWSMessageHeader");
-		//	var state = wsServer.GetWSMessageState(connId);
-		//	//WSOpcode.Close为客户端主动断开连接
-		//	if (state != null && state.OperationCode == WSOpcode.Close)
-		//	{
-		//		wsServer.Disconnect(connId);
-		//	}
-		//	return HandleResult.Ok;
-		//}
-
-		//private HandleResult WsServer_OnShutdown()
-		//{
-		//	Log.ConsoleWrite("--------------WsServer_OnShutdown");
-		//	return HandleResult.Ok;
-		//}
 	}
 }
