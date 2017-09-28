@@ -1,0 +1,402 @@
+﻿<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.5\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.5\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="..\packages\Microsoft.Net.Compilers.1.3.2\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.1.3.2\build\Microsoft.Net.Compilers.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{580FC8EB-8D4D-47BB-B396-D8BA8B6BC059}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>GoStop.Web</RootNamespace>
+    <AssemblyName>GoStop.Web</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <Use64BitIISExpress />
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.5\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+    <Content Include="script\global.meta" />
+    <Content Include="script\global\common.meta" />
+    <Content Include="script\global\commonUI.meta" />
+    <Content Include="script\global\commonUI\DialAwardUI.js.meta" />
+    <Content Include="script\global\commonUI\Tips.js.meta" />
+    <Content Include="script\global\common\AudioManager.js.meta" />
+    <Content Include="script\global\common\AudioObject.js.meta" />
+    <Content Include="script\global\common\ButtonClickSound.js.meta" />
+    <Content Include="script\global\common\EnumType.js.meta" />
+    <Content Include="script\global\common\Global.js.meta" />
+    <Content Include="script\global\common\PoolMgr.js.meta" />
+    <Content Include="script\global\common\ReflectCallback.js.meta" />
+    <Content Include="script\global\common\ResourcesManager.js.meta" />
+    <Content Include="script\global\friend.meta" />
+    <Content Include="script\global\friend\FriendItem.js.meta" />
+    <Content Include="script\global\friend\FriendMsg.js.meta" />
+    <Content Include="script\global\friend\FriendRequestItem.js.meta" />
+    <Content Include="script\global\friend\FriendUI.js.meta" />
+    <Content Include="script\global\friend\InviteFriendItem.js.meta" />
+    <Content Include="script\global\friend\InviteFriendsUI.js.meta" />
+    <Content Include="script\global\module.meta" />
+    <Content Include="script\global\module\ModuleManager.js.meta" />
+    <Content Include="script\global\module\Mod_Game.js.meta" />
+    <Content Include="script\global\module\Mod_Level.js.meta" />
+    <Content Include="script\global\module\Mod_Line.js.meta" />
+    <Content Include="script\global\module\Mod_LineRate.js.meta" />
+    <Content Include="script\global\module\Mod_UrlConfig.js.meta" />
+    <Content Include="script\global\network.meta" />
+    <Content Include="script\global\network\MessageManager.js.meta" />
+    <Content Include="script\global\network\mySocket.js.meta" />
+    <Content Include="script\global\network\NetworkGame.js.meta" />
+    <Content Include="script\global\network\NetworkLobby.js.meta" />
+    <Content Include="script\global\network\NetworkManager.js.meta" />
+    <Content Include="script\global\network\Package.js.meta" />
+    <Content Include="script\global\node_modules.meta" />
+    <Content Include="script\global\node_modules\crypto-js.meta" />
+    <Content Include="script\global\node_modules\crypto-js\aes.js.meta" />
+    <Content Include="script\global\node_modules\crypto-js\bower.json" />
+    <Content Include="script\global\node_modules\crypto-js\bower.json.meta" />
+    <Content Include="script\global\node_modules\crypto-js\cipher-core.js.meta" />
+    <Content Include="script\global\node_modules\crypto-js\CONTRIBUTING.md" />
+    <Content Include="script\global\node_modules\crypto-js\CONTRIBUTING.md.meta" />
+    <Content Include="script\global\node_modules\crypto-js\core.js.meta" />
+    <Content Include="script\global\node_modules\crypto-js\crypto-js.js.meta" />
+    <Content Include="script\global\node_modules\crypto-js\enc-base64.js.meta" />
+    <Content Include="script\global\node_modules\crypto-js\enc-hex.js.meta" />
+    <Content Include="script\global\node_modules\crypto-js\enc-latin1.js.meta" />
+    <Content Include="script\global\node_modules\crypto-js\enc-utf16.js.meta" />
+    <Content Include="script\global\node_modules\crypto-js\enc-utf8.js.meta" />
+    <Content Include="script\global\node_modules\crypto-js\evpkdf.js.meta" />
+    <Content Include="script\global\node_modules\crypto-js\format-hex.js.meta" />
+    <Content Include="script\global\node_modules\crypto-js\format-openssl.js.meta" />
+    <Content Include="script\global\node_modules\crypto-js\hmac-md5.js.meta" />
+    <Content Include="script\global\node_modules\crypto-js\hmac-ripemd160.js.meta" />
+    <Content Include="script\global\node_modules\crypto-js\hmac-sha1.js.meta" />
+    <Content Include="script\global\node_modules\crypto-js\hmac-sha224.js.meta" />
+    <Content Include="script\global\node_modules\crypto-js\hmac-sha256.js.meta" />
+    <Content Include="script\global\node_modules\crypto-js\hmac-sha3.js.meta" />
+    <Content Include="script\global\node_modules\crypto-js\hmac-sha384.js.meta" />
+    <Content Include="script\global\node_modules\crypto-js\hmac-sha512.js.meta" />
+    <Content Include="script\global\node_modules\crypto-js\hmac.js.meta" />
+    <Content Include="script\global\node_modules\crypto-js\index.js.meta" />
+    <Content Include="script\global\node_modules\crypto-js\lib-typedarrays.js.meta" />
+    <Content Include="script\global\node_modules\crypto-js\LICENSE" />
+    <Content Include="script\global\node_modules\crypto-js\LICENSE.meta" />
+    <Content Include="script\global\node_modules\crypto-js\md5.js.meta" />
+    <Content Include="script\global\node_modules\crypto-js\mode-cfb.js.meta" />
+    <Content Include="script\global\node_modules\crypto-js\mode-ctr-gladman.js.meta" />
+    <Content Include="script\global\node_modules\crypto-js\mode-ctr.js.meta" />
+    <Content Include="script\global\node_modules\crypto-js\mode-ecb.js.meta" />
+    <Content Include="script\global\node_modules\crypto-js\mode-ofb.js.meta" />
+    <Content Include="script\global\node_modules\crypto-js\package.json" />
+    <Content Include="script\global\node_modules\crypto-js\package.json.meta" />
+    <Content Include="script\global\node_modules\crypto-js\pad-ansix923.js.meta" />
+    <Content Include="script\global\node_modules\crypto-js\pad-iso10126.js.meta" />
+    <Content Include="script\global\node_modules\crypto-js\pad-iso97971.js.meta" />
+    <Content Include="script\global\node_modules\crypto-js\pad-nopadding.js.meta" />
+    <Content Include="script\global\node_modules\crypto-js\pad-pkcs7.js.meta" />
+    <Content Include="script\global\node_modules\crypto-js\pad-zeropadding.js.meta" />
+    <Content Include="script\global\node_modules\crypto-js\pbkdf2.js.meta" />
+    <Content Include="script\global\node_modules\crypto-js\rabbit-legacy.js.meta" />
+    <Content Include="script\global\node_modules\crypto-js\rabbit.js.meta" />
+    <Content Include="script\global\node_modules\crypto-js\rc4.js.meta" />
+    <Content Include="script\global\node_modules\crypto-js\README.md" />
+    <Content Include="script\global\node_modules\crypto-js\README.md.meta" />
+    <Content Include="script\global\node_modules\crypto-js\ripemd160.js.meta" />
+    <Content Include="script\global\node_modules\crypto-js\sha1.js.meta" />
+    <Content Include="script\global\node_modules\crypto-js\sha224.js.meta" />
+    <Content Include="script\global\node_modules\crypto-js\sha256.js.meta" />
+    <Content Include="script\global\node_modules\crypto-js\sha3.js.meta" />
+    <Content Include="script\global\node_modules\crypto-js\sha384.js.meta" />
+    <Content Include="script\global\node_modules\crypto-js\sha512.js.meta" />
+    <Content Include="script\global\node_modules\crypto-js\tripledes.js.meta" />
+    <Content Include="script\global\node_modules\crypto-js\x64-core.js.meta" />
+    <Content Include="script\global\node_modules\csvjs.meta" />
+    <Content Include="script\global\node_modules\csvjs\csv.js.meta" />
+    <Content Include="script\global\node_modules\csvjs\csv.min.js.meta" />
+    <Content Include="script\global\player.meta" />
+    <Content Include="script\global\player\GameOtherPlayers.js.meta" />
+    <Content Include="script\global\player\GiftGetList.js.meta" />
+    <Content Include="script\global\player\GiftItem.js.meta" />
+    <Content Include="script\global\player\PlayerInfo.js.meta" />
+    <Content Include="script\global\player\PlayerInfoUI.js.meta" />
+    <Content Include="script\scene.meta" />
+    <Content Include="script\scene\hotUpdate.meta" />
+    <Content Include="script\scene\hotUpdate\HotUpdate.js.meta" />
+    <Content Include="script\scene\hotUpdate\UpdateManager.js.meta" />
+    <Content Include="script\scene\lobby.meta" />
+    <Content Include="script\scene\lobby\LobbyManager.js.meta" />
+    <Content Include="script\scene\lobby\LocalHeadIcon.js.meta" />
+    <Content Include="script\scene\lobby\MyCenter.js.meta" />
+    <Content Include="script\scene\lobby\OnlineAwardUI.js.meta" />
+    <Content Include="script\scene\lobby\SettingsUI.js.meta" />
+    <Content Include="script\scene\lobby\Shop.js.meta" />
+    <Content Include="script\scene\lobby\ShopCommodity.js.meta" />
+    <Content Include="script\scene\lobby\ThemeInfo.js.meta" />
+    <Content Include="script\scene\login.meta" />
+    <Content Include="script\scene\login\LoginManager.js.meta" />
+    <Content Include="script\scene\slots.meta" />
+    <Content Include="script\scene\slots45.meta" />
+    <Content Include="script\scene\slots45\MatrixSprite45.js.meta" />
+    <Content Include="script\scene\slots45\Slots45Manager.js.meta" />
+    <Content Include="script\scene\slots777.meta" />
+    <Content Include="script\scene\slots777\MatrixSprite777.js.meta" />
+    <Content Include="script\scene\slots777\Slots777Manager.js.meta" />
+    <Content Include="script\scene\slotsCup.meta" />
+    <Content Include="script\scene\slotsCup\CupItem.js.meta" />
+    <Content Include="script\scene\slotsCup\CupPlay.js.meta" />
+    <Content Include="script\scene\slotsRemove.meta" />
+    <Content Include="script\scene\slotsRemove\RBet.js.meta" />
+    <Content Include="script\scene\slotsRemove\RMatrixSprite.js.meta" />
+    <Content Include="script\scene\slotsRemove\RMSManager.js.meta" />
+    <Content Include="script\scene\slotsRemove\SlotsRManager.js.meta" />
+    <Content Include="script\scene\slots\AlterBetUI.js.meta" />
+    <Content Include="script\scene\slots\Chat.js.meta" />
+    <Content Include="script\scene\slots\Chests.js.meta" />
+    <Content Include="script\scene\slots\ChestsAward.js.meta" />
+    <Content Include="script\scene\slots\GameHelpUI.js.meta" />
+    <Content Include="script\scene\slots\Jackpot.js.meta" />
+    <Content Include="script\scene\slots\LineTips.js.meta" />
+    <Content Include="script\scene\slots\LineTipsManager.js.meta" />
+    <Content Include="script\scene\slots\MatrixSprite.js.meta" />
+    <Content Include="script\scene\slots\MenuUI.js.meta" />
+    <Content Include="script\scene\slots\MSManager.js.meta" />
+    <Content Include="script\scene\slots\SlotsCount.js.meta" />
+    <Content Include="script\scene\slots\SlotsManager.js.meta" />
+    <Content Include="script\scene\slots\SpinAuto.js.meta" />
+    <Content Include="script\scene\slots\TimeLimitRank.js.meta" />
+    <Content Include="script\scene\slots\TimeLimitRankItem.js.meta" />
+    <Content Include="script\scene\slots\WinTipsUI.js.meta" />
+    <Content Include="script\scene\test.meta" />
+    <Content Include="script\scene\test\Test.js.meta" />
+    <Content Include="script\scene\test\Test_MSG.js.meta" />
+    <Content Include="script\scene\test\WaveFigure.js.meta" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="index.html" />
+    <Content Include="mySocket.js" />
+    <Content Include="script\global\commonUI\DialAwardUI.js" />
+    <Content Include="script\global\commonUI\Tips.js" />
+    <Content Include="script\global\common\AudioManager.js" />
+    <Content Include="script\global\common\AudioObject.js" />
+    <Content Include="script\global\common\ButtonClickSound.js" />
+    <Content Include="script\global\common\EnumType.js" />
+    <Content Include="script\global\common\Global.js" />
+    <Content Include="script\global\common\PoolMgr.js" />
+    <Content Include="script\global\common\ReflectCallback.js" />
+    <Content Include="script\global\common\ResourcesManager.js" />
+    <Content Include="script\global\friend\FriendItem.js" />
+    <Content Include="script\global\friend\FriendMsg.js" />
+    <Content Include="script\global\friend\FriendRequestItem.js" />
+    <Content Include="script\global\friend\FriendUI.js" />
+    <Content Include="script\global\friend\InviteFriendItem.js" />
+    <Content Include="script\global\friend\InviteFriendsUI.js" />
+    <Content Include="script\global\module\ModuleManager.js" />
+    <Content Include="script\global\module\Mod_Game.js" />
+    <Content Include="script\global\module\Mod_Level.js" />
+    <Content Include="script\global\module\Mod_Line.js" />
+    <Content Include="script\global\module\Mod_LineRate.js" />
+    <Content Include="script\global\module\Mod_UrlConfig.js" />
+    <Content Include="script\global\network\MessageManager.js" />
+    <Content Include="script\global\network\mySocket.js" />
+    <Content Include="script\global\network\NetworkGame.js" />
+    <Content Include="script\global\network\NetworkLobby.js" />
+    <Content Include="script\global\network\NetworkManager.js" />
+    <Content Include="script\global\network\Package.js" />
+    <Content Include="script\global\node_modules\crypto-js\aes.js" />
+    <Content Include="script\global\node_modules\crypto-js\cipher-core.js" />
+    <Content Include="script\global\node_modules\crypto-js\core.js" />
+    <Content Include="script\global\node_modules\crypto-js\crypto-js.js" />
+    <Content Include="script\global\node_modules\crypto-js\enc-base64.js" />
+    <Content Include="script\global\node_modules\crypto-js\enc-hex.js" />
+    <Content Include="script\global\node_modules\crypto-js\enc-latin1.js" />
+    <Content Include="script\global\node_modules\crypto-js\enc-utf16.js" />
+    <Content Include="script\global\node_modules\crypto-js\enc-utf8.js" />
+    <Content Include="script\global\node_modules\crypto-js\evpkdf.js" />
+    <Content Include="script\global\node_modules\crypto-js\format-hex.js" />
+    <Content Include="script\global\node_modules\crypto-js\format-openssl.js" />
+    <Content Include="script\global\node_modules\crypto-js\hmac-md5.js" />
+    <Content Include="script\global\node_modules\crypto-js\hmac-ripemd160.js" />
+    <Content Include="script\global\node_modules\crypto-js\hmac-sha1.js" />
+    <Content Include="script\global\node_modules\crypto-js\hmac-sha224.js" />
+    <Content Include="script\global\node_modules\crypto-js\hmac-sha256.js" />
+    <Content Include="script\global\node_modules\crypto-js\hmac-sha3.js" />
+    <Content Include="script\global\node_modules\crypto-js\hmac-sha384.js" />
+    <Content Include="script\global\node_modules\crypto-js\hmac-sha512.js" />
+    <Content Include="script\global\node_modules\crypto-js\hmac.js" />
+    <Content Include="script\global\node_modules\crypto-js\index.js" />
+    <Content Include="script\global\node_modules\crypto-js\lib-typedarrays.js" />
+    <Content Include="script\global\node_modules\crypto-js\md5.js" />
+    <Content Include="script\global\node_modules\crypto-js\mode-cfb.js" />
+    <Content Include="script\global\node_modules\crypto-js\mode-ctr-gladman.js" />
+    <Content Include="script\global\node_modules\crypto-js\mode-ctr.js" />
+    <Content Include="script\global\node_modules\crypto-js\mode-ecb.js" />
+    <Content Include="script\global\node_modules\crypto-js\mode-ofb.js" />
+    <Content Include="script\global\node_modules\crypto-js\pad-ansix923.js" />
+    <Content Include="script\global\node_modules\crypto-js\pad-iso10126.js" />
+    <Content Include="script\global\node_modules\crypto-js\pad-iso97971.js" />
+    <Content Include="script\global\node_modules\crypto-js\pad-nopadding.js" />
+    <Content Include="script\global\node_modules\crypto-js\pad-pkcs7.js" />
+    <Content Include="script\global\node_modules\crypto-js\pad-zeropadding.js" />
+    <Content Include="script\global\node_modules\crypto-js\pbkdf2.js" />
+    <Content Include="script\global\node_modules\crypto-js\rabbit-legacy.js" />
+    <Content Include="script\global\node_modules\crypto-js\rabbit.js" />
+    <Content Include="script\global\node_modules\crypto-js\rc4.js" />
+    <Content Include="script\global\node_modules\crypto-js\ripemd160.js" />
+    <Content Include="script\global\node_modules\crypto-js\sha1.js" />
+    <Content Include="script\global\node_modules\crypto-js\sha224.js" />
+    <Content Include="script\global\node_modules\crypto-js\sha256.js" />
+    <Content Include="script\global\node_modules\crypto-js\sha3.js" />
+    <Content Include="script\global\node_modules\crypto-js\sha384.js" />
+    <Content Include="script\global\node_modules\crypto-js\sha512.js" />
+    <Content Include="script\global\node_modules\crypto-js\tripledes.js" />
+    <Content Include="script\global\node_modules\crypto-js\x64-core.js" />
+    <Content Include="script\global\node_modules\csvjs\csv.js" />
+    <Content Include="script\global\node_modules\csvjs\csv.min.js" />
+    <Content Include="script\global\player\GameOtherPlayers.js" />
+    <Content Include="script\global\player\GiftGetList.js" />
+    <Content Include="script\global\player\GiftItem.js" />
+    <Content Include="script\global\player\PlayerInfo.js" />
+    <Content Include="script\global\player\PlayerInfoUI.js" />
+    <Content Include="script\scene\hotUpdate\HotUpdate.js" />
+    <Content Include="script\scene\hotUpdate\UpdateManager.js" />
+    <Content Include="script\scene\lobby\LobbyManager.js" />
+    <Content Include="script\scene\lobby\LocalHeadIcon.js" />
+    <Content Include="script\scene\lobby\MyCenter.js" />
+    <Content Include="script\scene\lobby\OnlineAwardUI.js" />
+    <Content Include="script\scene\lobby\SettingsUI.js" />
+    <Content Include="script\scene\lobby\Shop.js" />
+    <Content Include="script\scene\lobby\ShopCommodity.js" />
+    <Content Include="script\scene\lobby\ThemeInfo.js" />
+    <Content Include="script\scene\login\LoginManager.js" />
+    <Content Include="script\scene\slots45\MatrixSprite45.js" />
+    <Content Include="script\scene\slots45\Slots45Manager.js" />
+    <Content Include="script\scene\slots777\MatrixSprite777.js" />
+    <Content Include="script\scene\slots777\Slots777Manager.js" />
+    <Content Include="script\scene\slotsCup\CupItem.js" />
+    <Content Include="script\scene\slotsCup\CupPlay.js" />
+    <Content Include="script\scene\slotsRemove\RBet.js" />
+    <Content Include="script\scene\slotsRemove\RMatrixSprite.js" />
+    <Content Include="script\scene\slotsRemove\RMSManager.js" />
+    <Content Include="script\scene\slotsRemove\SlotsRManager.js" />
+    <Content Include="script\scene\slots\AlterBetUI.js" />
+    <Content Include="script\scene\slots\Chat.js" />
+    <Content Include="script\scene\slots\Chests.js" />
+    <Content Include="script\scene\slots\ChestsAward.js" />
+    <Content Include="script\scene\slots\GameHelpUI.js" />
+    <Content Include="script\scene\slots\Jackpot.js" />
+    <Content Include="script\scene\slots\LineTips.js" />
+    <Content Include="script\scene\slots\LineTipsManager.js" />
+    <Content Include="script\scene\slots\MatrixSprite.js" />
+    <Content Include="script\scene\slots\MenuUI.js" />
+    <Content Include="script\scene\slots\MSManager.js" />
+    <Content Include="script\scene\slots\SlotsCount.js" />
+    <Content Include="script\scene\slots\SlotsManager.js" />
+    <Content Include="script\scene\slots\SpinAuto.js" />
+    <Content Include="script\scene\slots\TimeLimitRank.js" />
+    <Content Include="script\scene\slots\TimeLimitRankItem.js" />
+    <Content Include="script\scene\slots\WinTipsUI.js" />
+    <Content Include="script\scene\test\Test.js" />
+    <Content Include="script\scene\test\Test_MSG.js" />
+    <Content Include="script\scene\test\WaveFigure.js" />
+    <Content Include="Web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>50260</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:50260/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>这台计算机上缺少此项目引用的 NuGet 程序包。使用“NuGet 程序包还原”可下载这些程序包。有关更多信息，请参见 http://go.microsoft.com/fwlink/?LinkID=322105。缺少的文件是 {0}。</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.1.3.2\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.1.3.2\build\Microsoft.Net.Compilers.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.5\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.5\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

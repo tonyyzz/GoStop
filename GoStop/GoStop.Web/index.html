@@ -1,0 +1,28 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<title></title>
+</head>
+<body>
+	<script>
+		var address = "127.0.0.1";
+		var port = 50006;
+		var ws = new WebSocket("ws://" + address + ":" + port);
+		console.log(ws);
+		ws.onopen = function () {
+			console.log("open");
+			ws.send("hello");
+		};
+		ws.onmessage = function (evt) {
+			console.log(evt.data)
+		};
+		ws.onclose = function (evt) {
+			console.log("WebSocketClosed!");
+		};
+		ws.onerror = function (evt) {
+			console.log("WebSocketError!");
+		};
+	</script>
+</body>
+</html>
