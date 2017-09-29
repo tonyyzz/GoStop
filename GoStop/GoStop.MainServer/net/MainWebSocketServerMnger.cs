@@ -99,12 +99,53 @@ namespace GoStop.MainServer
 		}
 		private HandleResult OnWSMessageBody(IntPtr connId, byte[] bytes)
 		{
-			Log.ConsoleWrite("--------------OnWSMessageBody");
-			var state = wsServer.GetWSMessageState(connId);
-			if (state != null)
+			try
 			{
-				// 原样返回给客户端
-				wsServer.SendWSMessage(connId, state, bytes);
+				if (bytes == null || bytes.Length <= 2)
+				{
+					return HandleResult.Ignore;
+				}
+				Log.ConsoleWrite("--------------OnWSMessageBody");
+				var session = wsServer.GetExtra<Session>(connId);
+				if (session == null)
+				{
+					Log.WriteInfo(string.Format("" + clsName + " - session = null > [{0},OnReceive] -> ({1} bytes)",
+						connId, bytes.Length));
+					return HandleResult.Error;
+				}
+				Log.WriteInfo(string.Format("" + clsName + " - > [{0},OnReceive] -> {1}:{2} ({3} bytes)",
+					session.ConnId, session.IpAddress, session.Port, bytes.Length));
+				int len = BitConverter.ToInt32(bytes, 0); //长度
+				CustomDE.Decrypt(bytes, 0, bytes.Length);
+				bytes = bytes.Skip(4).ToArray();
+				short mainid = BitConverter.ToInt16(bytes, 0); //主协议
+				short secondid = BitConverter.ToInt16(bytes, 2); //次协议
+				Console.WriteLine("" + clsName + " : ----package log: 【{0}】正在调用主协议为【{1}】，次协议为【{2}】的接口",
+						DateTime.Now.ToString("HH:mm:ss"), mainid, secondid);
+				Package pack = PackageManage.Instance.NewPackage(mainid, secondid);
+				if (pack == null)
+				{
+					throw new Exception(
+						string.Format("主协议为【{0}】，次协议为【{1}】的包体不存在或者还未注册",
+						mainid, secondid));
+				}
+				pack.Write(bytes, len);
+				pack.ReadHead();
+				pack.SetSession(session);
+				try
+				{
+					pack.Excute();
+				}
+				catch (Exception ex)
+				{
+					Log.WriteError(ex);
+					return HandleResult.Error;
+				}
+			}
+			catch (Exception ex)
+			{
+				Log.WriteError(ex);
+				return HandleResult.Ignore;
 			}
 			return HandleResult.Ok;
 		}
@@ -166,6 +207,21 @@ namespace GoStop.MainServer
 			// 服务关闭了
 			Log.WriteInfo(" > [OnShutdown]");
 			return HandleResult.Ok;
+		}
+
+		public void Send(IntPtr connId, Package pack)
+		{
+			byte[] bytes = pack.GetBuffer();
+			int len = pack.getLen();
+			byte[] bytes_tmp = new byte[len];
+			Array.Copy(bytes, 0, bytes_tmp, 0, len);
+			CustomDE.Encrypt(bytes_tmp, 0, bytes_tmp.Length);
+			var state = wsServer.GetWSMessageState(connId);
+			if (state != null)
+			{
+				// 原样返回给客户端
+				wsServer.SendWSMessage(connId, state, bytes_tmp);
+			}
 		}
 	}
 }

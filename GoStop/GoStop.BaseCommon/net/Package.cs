@@ -74,7 +74,7 @@ namespace GoStop.BaseCommon
 		{
 			if (m_Buffer.GetDataCount() > 0)
 			{
-				m_iPosition = 4;
+				m_iPosition = 0;
 				m_MsgHead.msgmainid = ReadShort();
 				m_MsgHead.msgsecondid = ReadShort();
 				m_MsgHead.msgLen = m_Buffer.GetDataCount() - 4;

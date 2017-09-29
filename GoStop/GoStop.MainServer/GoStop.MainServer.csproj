@@ -48,6 +48,7 @@
     <Compile Include="net\TcpPackServerMnger.cs" />
     <Compile Include="net\MainWebSocketServerMnger.cs" />
     <Compile Include="opt\SubServerMnger.cs" />
+    <Compile Include="package\client\ClientLoginPacket.cs" />
     <Compile Include="package\subServer\UploadWsIPAddressPacket.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

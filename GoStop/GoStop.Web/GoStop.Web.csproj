@@ -66,6 +66,13 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="r.js" />
+    <Content Include="_yScript\baseCommon\enumType.js" />
+    <Content Include="_yScript\baseCommon\MessageManager.js" />
+    <Content Include="_yScript\baseCommon\MessageRegister.js" />
+    <Content Include="_yScript\baseCommon\Package.js" />
+    <Content Include="_yScript\net\webSocketMnger.js" />
+    <Content Include="_yScript\package\packageFuntion.js" />
     <None Include="packages.config" />
     <Content Include="script\global.meta" />
     <Content Include="script\global\common.meta" />
@@ -230,7 +237,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="index.html" />
-    <Content Include="mySocket.js" />
     <Content Include="script\global\commonUI\DialAwardUI.js" />
     <Content Include="script\global\commonUI\Tips.js" />
     <Content Include="script\global\common\AudioManager.js" />
@@ -360,6 +366,7 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

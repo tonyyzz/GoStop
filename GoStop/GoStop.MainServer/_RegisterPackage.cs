@@ -1,4 +1,5 @@
 ﻿using GoStop.BaseCommon;
+using GoStop.MainServer.package.client;
 using GoStop.MainServer.package.subServer;
 using System;
 using System.Collections.Generic;
@@ -15,11 +16,11 @@ namespace GoStop.MainServer
 		/// </summary>
 		public static void Register()
 		{
-			#region ------------账号------------
+			//
 			PackageManage.Instance.RegisterPackage((short)MainCommand.MC_SUBSERVER, (short)SecondCommand.SC_SUBSERVER_uploadWsIpAddress, new UploadWsIPAddressPacket());
-			#endregion
 
-			
+			//
+			PackageManage.Instance.RegisterPackage((short)MainCommand.MC_CLIENT, (short)SecondCommand.SC_CLIENT_login, new ClientLoginPacket());
 
 		}
 	}

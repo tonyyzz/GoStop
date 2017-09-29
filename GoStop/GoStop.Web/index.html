@@ -3,26 +3,20 @@
 <head>
 	<meta charset="utf-8" />
 	<title></title>
+	<script src="_yScript/baseCommon/enumType.js"></script>
+	<script src="_yScript/baseCommon/Package.js"></script>
+	<script src="_yScript/baseCommon/MessageManager.js"></script>
+	<script src="_yScript/package/packageFuntion.js"></script>
+	<script src="_yScript/baseCommon/MessageRegister.js"></script>
+	<script src="_yScript/net/webSocketMnger.js"></script>
+	<!--<script src="r.js"></script>
+	<script src="script/global/network/mySocket.js"></script>-->
 </head>
 <body>
 	<script>
 		var address = "127.0.0.1";
 		var port = 50006;
-		var ws = new WebSocket("ws://" + address + ":" + port);
-		console.log(ws);
-		ws.onopen = function () {
-			console.log("open");
-			ws.send("hello");
-		};
-		ws.onmessage = function (evt) {
-			console.log(evt.data)
-		};
-		ws.onclose = function (evt) {
-			console.log("WebSocketClosed!");
-		};
-		ws.onerror = function (evt) {
-			console.log("WebSocketError!");
-		};
+		webSocketMnger.connect(address, port);
 	</script>
 </body>
 </html>
