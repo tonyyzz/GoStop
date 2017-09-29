@@ -2,7 +2,8 @@
 	loginRetFunc(target, pack) {
 		console.log(pack);
 		var str = pack.readString();
+		console.log(str);
 		var df = pack.readInt();
-		debugger;
+		console.log(df);
 	}
 }
