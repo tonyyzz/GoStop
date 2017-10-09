@@ -93,11 +93,14 @@ namespace GoStop.SubServer
 				Log.WriteInfo(string.Format(" > [{0},OnAccept] -> Server_GetClientAddress() Error", connId));
 			}
 			// 设置附加数据
-			MySession session = new MySession();
-			session.ConnId = connId;
-			session.IpAddress = ip;
-			session.Port = port;
-			session.buffer = new byte[maxBufferSize];//设置用户网络缓冲区
+			MySession session = new MySession
+			{
+				ConnId = connId,
+				IpAddress = ip,
+				Port = port,
+				buffer = new byte[maxBufferSize],//设置用户网络缓冲区
+				player = null
+			};
 
 			////session.player = new Player(connId, tcp);//设置用户数据
 

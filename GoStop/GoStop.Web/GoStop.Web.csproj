@@ -67,7 +67,9 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="lib\jquery-3.2.1.js" />
     <Content Include="r.js" />
+    <Content Include="_yScript\local\service.js" />
     <Content Include="_yScript\package\enumType.js" />
     <Content Include="_yScript\baseCommon\MessageManager.js" />
     <Content Include="_yScript\package\MessageRegister.js" />

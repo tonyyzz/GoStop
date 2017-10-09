@@ -47,6 +47,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BasePlayer.cs" />
+    <Compile Include="common\DateHelper.cs" />
+    <Compile Include="common\FileBinaryConvertHelper.cs" />
+    <Compile Include="common\ListHelper.cs" />
+    <Compile Include="common\ModelHelper.cs" />
+    <Compile Include="common\RandomHelper.cs" />
+    <Compile Include="common\StringHelper.cs" />
+    <Compile Include="config\csvConfig.cs" />
+    <Compile Include="config\INIBase.cs" />
     <Compile Include="log\Log.cs" />
     <Compile Include="log\Log4NetHelper.cs" />
     <Compile Include="net\AutoBuffer.cs" />

@@ -4,16 +4,15 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{688C1DF1-A1ED-4A16-A2B3-464D5A0DD754}</ProjectGuid>
-    <OutputType>Exe</OutputType>
-    <RootNamespace>GoStop.SubServer</RootNamespace>
-    <AssemblyName>GoStop.SubServer</AssemblyName>
+    <ProjectGuid>{F552FAA0-013B-42E6-8C49-1A6DD0D9F708}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>GoStop.DAL</RootNamespace>
+    <AssemblyName>GoStop.DAL</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>x64</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -23,7 +22,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -32,8 +30,11 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="HPSocketCS">
-      <HintPath>..\Lib\HPSocketCS.dll</HintPath>
+    <Reference Include="Dapper, Version=1.50.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Dapper.1.50.2\lib\net451\Dapper.dll</HintPath>
+    </Reference>
+    <Reference Include="MySql.Data">
+      <HintPath>..\Lib\MySql.Data.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -45,27 +46,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="net\TableThread.cs" />
-    <Compile Include="net\TcpPackClientMnger.cs" />
-    <Compile Include="net\SubWebSocketServerMnger.cs" />
-    <Compile Include="opt\PlayerManager.cs" />
-    <Compile Include="package\AccountLoginPacket.cs" />
-    <Compile Include="Program.cs" />
+    <Compile Include="base\BaseDAL.cs" />
+    <Compile Include="PlayerDAL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Startup.cs" />
-    <Compile Include="_RegisterPackage.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\GoStop.BaseCommon\GoStop.BaseCommon.csproj">
       <Project>{d35513cf-028a-4999-aa7a-bb25a5206f6b}</Project>
       <Name>GoStop.BaseCommon</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\GoStop.BLL\GoStop.BLL.csproj">
-      <Project>{28159fae-3142-44dd-af0e-3d6d2675f8f8}</Project>
-      <Name>GoStop.BLL</Name>
     </ProjectReference>
     <ProjectReference Include="..\GoStop.Model\GoStop.Model.csproj">
       <Project>{55859676-8ddb-4c76-84a7-cce390dc6eaa}</Project>
@@ -73,7 +61,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="logic\" />
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

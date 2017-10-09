@@ -7,6 +7,7 @@
 		ws.onopen = (event) => {
 			console.log("onopen");
 			var package = new Package(MainCommand.MC_ACCOUNT, SecondCommand.SC_ACCOUNT_login);
+			package.writeInt(1);
 			webSocketMnger.send(package);
 		}
 		ws.onmessage = function (event) {
@@ -48,7 +49,7 @@
 	///接收到返回的消息，消息处理
 	handleMessage(pack) {
 		if (!pack.mainID || !pack.secondID) {
-			console.warn("错误的消息包 " + pack.mainID + " " + pack.secondID + "");
+			console.error("错误的消息包或者消息包未注册【mainID:" + pack.mainID + ",secondID:" + pack.secondID + "】");
 			return;
 		}
 		var callbackList = MessageManager.getMsgCallback(pack.mainID, pack.secondID);

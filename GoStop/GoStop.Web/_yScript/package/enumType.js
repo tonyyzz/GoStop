@@ -1,10 +1,10 @@
 ﻿var MainCommand = {
 	//错误
-	MC_ERROR: 0,
+	MC_ERROR: 1,
 	//子服务器
-	MC_SUBSERVER: 1,
+	MC_SUBSERVER: 2,
 	//玩家账户信息
-	MC_ACCOUNT: 2,
+	MC_ACCOUNT: 3,
 
 };
 var SecondCommand = {
