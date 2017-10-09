@@ -4,6 +4,7 @@ using System;
 using System.Linq;
 using System.Net;
 using System.Text;
+using System.Threading;
 
 namespace GoStop.MainServer
 {
@@ -117,10 +118,15 @@ namespace GoStop.MainServer
 				}
 				pack.Write(bytes, len);
 				pack.ReadHead();
+				pack.SetPosition(8);
 				pack.SetSession(session);
 				try
 				{
-					pack.Excute();
+					ThreadPool.QueueUserWorkItem(o =>
+					{
+						pack.Excute();
+					});
+					//pack.Excute();
 				}
 				catch (Exception ex)
 				{

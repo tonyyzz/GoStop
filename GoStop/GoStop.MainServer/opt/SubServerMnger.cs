@@ -18,5 +18,6 @@ namespace GoStop.MainServer
 		public ushort tcpPort { get; set; }
 		public string wsAddress { get; set; }
 		public ushort wsPort { get; set; }
+		public long wsConnCount { get; set; }
 	}
 }

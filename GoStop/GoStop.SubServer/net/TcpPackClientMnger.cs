@@ -1,5 +1,4 @@
 ﻿using GoStop.BaseCommon;
-using GoStop.MainServer;
 using HPSocketCS;
 using System;
 using System.Collections.Generic;
@@ -62,7 +61,7 @@ namespace GoStop.SubServer
 			string subWsAddress = "127.0.0.1";
 			ushort subWsPort = 50008;
 			bool isOnline = false;
-			var flag = SubWebSocketServerMnger.GetInstance().Start(subWsAddress, subWsPort);
+			var flag = SubWebSocketServerMnger.GetInstance().Start(subWsAddress, subWsPort, out subWsAddress, out subWsPort);
 			if (flag) //WsSocket启动成功后，将wsSocket的IPAddress上传至主服务器
 			{
 				string wsTransmitAddress = subWsAddress;

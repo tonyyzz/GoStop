@@ -68,9 +68,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="r.js" />
-    <Content Include="_yScript\baseCommon\enumType.js" />
+    <Content Include="_yScript\package\enumType.js" />
     <Content Include="_yScript\baseCommon\MessageManager.js" />
-    <Content Include="_yScript\baseCommon\MessageRegister.js" />
+    <Content Include="_yScript\package\MessageRegister.js" />
     <Content Include="_yScript\baseCommon\Package.js" />
     <Content Include="_yScript\net\webSocketMnger.js" />
     <Content Include="_yScript\package\packageFuntion.js" />

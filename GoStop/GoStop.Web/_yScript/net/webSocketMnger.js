@@ -4,9 +4,9 @@
 		MessageRegister.register();
 		ws = new WebSocket("ws://" + address + ":" + port);
 		ws.binaryType = "arraybuffer";
-		ws.onopen = () => {
-			var package = new Package(MainCommand.MC_CLIENT, SecondCommand.SC_CLIENT_login);
-			package.writeString("aaaaa");
+		ws.onopen = (event) => {
+			console.log("onopen");
+			var package = new Package(MainCommand.MC_ACCOUNT, SecondCommand.SC_ACCOUNT_login);
 			webSocketMnger.send(package);
 		}
 		ws.onmessage = function (event) {
@@ -15,10 +15,12 @@
 			webSocketMnger.handleMessage(pack);
 			pack = null;
 		};
-		ws.onclose = function (evt) {
+		ws.onclose = function (event) {
+			console.log(event);
 			console.log("WebSocketClosed!");
 		};
-		ws.onerror = function (evt) {
+		ws.onerror = function (event) {
+			console.log(event);
 			console.log("WebSocketError!");
 		};
 	},

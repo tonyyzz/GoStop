@@ -16,11 +16,12 @@ namespace GoStop.MainServer
 		/// </summary>
 		public static void Register()
 		{
-			//
+			//子服务器
 			PackageManage.Instance.RegisterPackage((short)MainCommand.MC_SUBSERVER, (short)SecondCommand.SC_SUBSERVER_uploadWsIpAddress, new UploadWsIPAddressPacket());
+			PackageManage.Instance.RegisterPackage((short)MainCommand.MC_SUBSERVER, (short)SecondCommand.SC_SUBSERVER_uploadClientConnCount, new UploadClientConnCountPacket());
 
-			//
-			PackageManage.Instance.RegisterPackage((short)MainCommand.MC_CLIENT, (short)SecondCommand.SC_CLIENT_login, new ClientLoginPacket());
+			//用户登录
+			PackageManage.Instance.RegisterPackage((short)MainCommand.MC_ACCOUNT, (short)SecondCommand.SC_ACCOUNT_login, new AccountLoginPacket());
 
 		}
 	}

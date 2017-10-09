@@ -74,12 +74,15 @@ namespace GoStop.BaseCommon
 		{
 			if (m_Buffer.GetDataCount() > 0)
 			{
-				m_iPosition = 0;
 				m_MsgHead.msgmainid = ReadShort();
 				m_MsgHead.msgsecondid = ReadShort();
 				m_MsgHead.msgLen = m_Buffer.GetDataCount() - 4;
-				//m_iPosition = 4;
 			}
+		}
+
+		public void SetPosition(int position)
+		{
+			m_iPosition = position;
 		}
 		public virtual void ReadPackage()
 		{

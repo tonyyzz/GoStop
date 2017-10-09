@@ -22,7 +22,7 @@ namespace GoStop.MainServer.package.subServer
 		public override void Excute()
 		{
 			string subWsAddress = ReadString();
-			ushort subWsPort = ReadUShort();
+			int subWsPort = ReadInt();
 
 			if (string.IsNullOrWhiteSpace(subWsAddress))
 			{
@@ -39,7 +39,7 @@ namespace GoStop.MainServer.package.subServer
 				tcpAddress = session.IpAddress,
 				tcpPort = session.Port,
 				wsAddress = subWsAddress,
-				wsPort = subWsPort
+				wsPort = (ushort)subWsPort
 			});
 		}
 	}

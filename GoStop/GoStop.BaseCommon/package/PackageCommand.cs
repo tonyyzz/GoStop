@@ -6,15 +6,12 @@ namespace GoStop.BaseCommon
 {
 	public enum MainCommand
 	{
-		/// <summary>
-		/// 错误
-		/// </summary>
+		//错误
 		MC_ERROR = 0,
-		/// <summary>
-		/// 子服务器
-		/// </summary>
+		//子服务器
 		MC_SUBSERVER = 1,
-		MC_CLIENT = 2,
+		//玩家账户信息
+		MC_ACCOUNT = 2,
 
 	}
 	public enum SecondCommand //不要超过 32767 因为会溢出，会和short转换
@@ -24,21 +21,12 @@ namespace GoStop.BaseCommon
 
 		//子服务器相关
 		SC_SUBSERVER_uploadWsIpAddress = 10,
+		SC_SUBSERVER_uploadClientConnCount = 11,
 
 		//客户端
-		SC_CLIENT_login = 20,
-		SC_CLIENT_login_ret = 21,
+		SC_ACCOUNT_login = 20,
+		SC_ACCOUNT_login_ret = 21,
 
 	}
 
-	/// <summary>
-	/// 错误消息
-	/// </summary>
-	public enum Error
-	{
-		/// <summary>
-		/// 已经在登录中
-		/// </summary>
-		login_isIn = 1,
-	}
 }

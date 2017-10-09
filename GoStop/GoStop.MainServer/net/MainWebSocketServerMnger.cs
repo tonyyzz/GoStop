@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using HPSocketCS;
 using GoStop.BaseCommon;
+using System.Threading;
 
 namespace GoStop.MainServer
 {
@@ -131,10 +132,16 @@ namespace GoStop.MainServer
 				}
 				pack.Write(bytes, len);
 				pack.ReadHead();
+				pack.SetPosition(4);
 				pack.SetSession(session);
 				try
 				{
-					pack.Excute();
+					ThreadPool.QueueUserWorkItem(o =>
+					{
+						pack.Excute();
+					});
+					//pack.Excute();
+
 				}
 				catch (Exception ex)
 				{
