@@ -5,7 +5,6 @@
 		ws = new WebSocket("ws://" + address + ":" + port);
 		ws.binaryType = "arraybuffer";
 		ws.onopen = (event) => {
-			console.log("onopen");
 			var package = new Package(MainCommand.MC_ACCOUNT, SecondCommand.SC_ACCOUNT_login);
 			package.writeInt(1);
 			webSocketMnger.send(package);
@@ -17,12 +16,10 @@
 			pack = null;
 		};
 		ws.onclose = function (event) {
-			console.log(event);
-			console.log("WebSocketClosed!");
+			console.warn("WebSocketClosed!");
 		};
 		ws.onerror = function (event) {
-			console.log(event);
-			console.log("WebSocketError!");
+			console.warn("WebSocketError!");
 		};
 	},
 	send: (pack) => {

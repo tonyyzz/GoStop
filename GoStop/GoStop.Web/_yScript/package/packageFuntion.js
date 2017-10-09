@@ -11,17 +11,15 @@
 		}
 	},
 	accountLoginRetFunc(target, pack) {
-		console.log(pack);
 		var serverType = pack.readString();
-		console.info("serverType:" + serverType);
+		console.warn("serverType:" + serverType);
 		if (serverType === "main") {
 			var flag = pack.readInt();
 			console.log(flag);
 			if (flag === 1) {
 				var subAddress = pack.readString();
-				console.log(subAddress);
 				var subPort = pack.readInt();
-				console.log(subPort);
+				console.log(subAddress + ":" + subPort);
 				webSocketMnger.close();
 				webSocketMnger.connect(subAddress, subPort);
 			}
