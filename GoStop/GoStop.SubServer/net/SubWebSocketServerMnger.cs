@@ -61,13 +61,13 @@ namespace GoStop.SubServer
 				flag = wsServer.Start();
 				if (flag)
 				{
-					Log.WriteInfo(string.Format("" + clsName + " Start OK -> ({0}:{1})",
+					Log.WriteInfo(string.Format(clsName + " Start OK -> ({0}:{1})",
 						wsServer.IpAddress, wsServer.Port));
 					break;
 				}
 				else
 				{
-					Log.WriteError(string.Format("" + clsName + " Start Error -> ({0}:{1})",
+					Log.WriteError(string.Format(clsName + " Start Error -> ({0}:{1})",
 						wsServer.ErrorMessage, wsServer.ErrorCode));
 					port++;
 				}
@@ -132,18 +132,18 @@ namespace GoStop.SubServer
 				var session = wsServer.GetExtra<Session>(connId);
 				if (session == null)
 				{
-					Log.WriteInfo(string.Format("" + clsName + " - session = null > [{0},OnReceive] -> ({1} bytes)",
+					Log.WriteInfo(string.Format(clsName + " - session = null > [{0},OnReceive] -> ({1} bytes)",
 						connId, bytes.Length));
 					return HandleResult.Error;
 				}
-				Log.WriteInfo(string.Format("" + clsName + " - > [{0},OnReceive] -> {1}:{2} ({3} bytes)",
+				Log.WriteInfo(string.Format(clsName + " - > [{0},OnReceive] -> {1}:{2} ({3} bytes)",
 					session.ConnId, session.IpAddress, session.Port, bytes.Length));
 				int len = BitConverter.ToInt32(bytes, 0); //长度
 				CustomDE.Decrypt(bytes, 0, bytes.Length);
 				bytes = bytes.Skip(4).ToArray();
 				short mainid = BitConverter.ToInt16(bytes, 0); //主协议
 				short secondid = BitConverter.ToInt16(bytes, 2); //次协议
-				Console.WriteLine("" + clsName + " : ----package log: 【{0}】正在调用主协议为【{1}】，次协议为【{2}】的接口",
+				Console.WriteLine(clsName + " : ----package log: 【{0}】正在调用主协议为【{1}】，次协议为【{2}】的接口",
 						DateTime.Now.ToString("HH:mm:ss"), mainid, secondid);
 				Package pack = PackageManage.Instance.NewPackage(mainid, secondid);
 				if (pack == null)
@@ -181,12 +181,33 @@ namespace GoStop.SubServer
 		private HandleResult OnClose(IntPtr connId, SocketOperation enOperation, int errorCode)
 		{
 			Log.ConsoleWrite("--------------OnClose");
-			//客户端关闭连接
 			if (errorCode == 0)
-				Log.WriteInfo(string.Format(" > [{0},OnClose]", connId));
+			{
+				Log.WriteInfo(string.Format(clsName + " : [{0},OnClose]",
+					connId));
+			}
 			else
-				Log.WriteInfo(string.Format(" > [{0},OnError] -> OP:{1},CODE:{2}", connId, enOperation, errorCode));
-
+			{
+				Log.WriteInfo(string.Format(clsName + " : [{0},OnClose] -> OP:{1},CODE:{2}",
+					connId, enOperation, errorCode));
+			}
+			var session = wsServer.GetExtra<Session>(connId);
+			if (session != null && session.player != null)
+			{
+				Model.PlayerModel player = session.player as Model.PlayerModel;
+				if (player != null)
+				{
+					Console.WriteLine(string.Format(clsName + " :-------------玩家【{0}】在【{1}】时下线----------------", player.Id, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")));
+					player.Offline();//玩家下线
+				}
+				session = null;
+				//移除该玩家与客户端的通信
+				if (!wsServer.RemoveExtra(connId))
+				{
+					Log.WriteInfo(string.Format(clsName + " : [{0},OnClose] -> SetConnectionExtra({0}, null) fail",
+						connId));
+				}
+			}
 
 			return HandleResult.Ok;
 		}
@@ -211,6 +232,11 @@ namespace GoStop.SubServer
 				// 原样返回给客户端
 				wsServer.SendWSMessage(connId, state, bytes_tmp);
 			}
+		}
+
+		public void Disconnect(IntPtr conID)
+		{
+			wsServer.Disconnect(conID);
 		}
 	}
 }

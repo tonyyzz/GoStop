@@ -40,7 +40,7 @@ namespace GoStop.Model
 		/// </summary>
 		public int Money { get; set; }
 	}
-	public partial class PlayerModel: BaseCommon.BasePlayer
+	public partial class PlayerModel : BaseCommon.BasePlayer
 	{
 		/// <summary>
 		/// 连接ID
@@ -50,5 +50,7 @@ namespace GoStop.Model
 		/// 玩家是否在线
 		/// </summary>
 		public bool online = false;
+		public string wsAddress = "";
+		public ushort wsPort = 0;
 	}
 }

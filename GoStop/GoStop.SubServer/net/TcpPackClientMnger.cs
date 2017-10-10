@@ -47,11 +47,11 @@ namespace GoStop.SubServer
 
 			if (tcpPackClient.Connect(address, port))
 			{
-				Log.WriteInfo(string.Format("" + clsName + " Connect {0}:{1} OK", address, port));
+				Log.WriteInfo(string.Format(clsName + " Connect {0}:{1} OK", address, port));
 			}
 			else
 			{
-				Log.WriteInfo(string.Format("" + clsName + " Connect {0}:{1} ERROR", address, port));
+				Log.WriteInfo(string.Format(clsName + " Connect {0}:{1} ERROR", address, port));
 			}
 		}
 		private HandleResult OnConnect(TcpClient sender)

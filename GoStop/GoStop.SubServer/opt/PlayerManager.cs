@@ -23,8 +23,8 @@ namespace GoStop.SubServer
 		{
 			player.online = true;
 			player.conID = session.ConnId;
-			//player.IpAddress = session.IpAddress;
-			//player.TcpPort = session.Port;
+			player.wsAddress = session.IpAddress;
+			player.wsPort = session.Port;
 			//player.LastLoginTime = DateTime.Now;
 
 			playerOnlineList.RemoveAll(m => m.Id == player.Id);
@@ -34,6 +34,20 @@ namespace GoStop.SubServer
 		public static void SendMsg(this Model.PlayerModel player, Package pack)
 		{
 			SubWebSocketServerMnger.GetInstance().Send(player.conID, pack);
+		}
+
+		/// <summary>
+		/// 玩家下线
+		/// </summary>
+		/// <param name="player"></param>
+		public static void Offline(this Model.PlayerModel player)
+		{
+			playerOnlineList.RemoveAll(m => m.Id == player.Id);
+			SubWebSocketServerMnger.GetInstance().Disconnect(player.conID);
+			player.online = false;
+			player.conID = IntPtr.Zero;
+			player.wsAddress = "";
+			player.wsPort = 0;
 		}
 	}
 }
