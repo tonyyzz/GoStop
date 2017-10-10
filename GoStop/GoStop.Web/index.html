@@ -15,13 +15,13 @@
 <body>
 	<input type="button" id="btnLogin" value="登录" />
 	<script>
-		var address = "127.0.0.1";
+		var address = "192.168.0.222";
 		var port = 50006;
 		$(function () {
-			$("#btnLogin").click(function () {
+			//$("#btnLogin").click(function () {
 				console.warn("登录操作");
 				webSocketMnger.connect(address, port);
-			})
+			//})
 
 
 		})

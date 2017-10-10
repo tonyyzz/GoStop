@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -15,11 +16,11 @@ namespace GoStop.MainServer
 
 			PackageConfig.Register();
 
-			string mainWsAddress = "127.0.0.1";
+			string mainWsAddress = IPAddress.Any.ToString();
 			ushort mainWsPort = 50006;
 			MainWebSocketServerMnger.GetInstance().Start(mainWsAddress, mainWsPort);
 
-			string tcpPackAddress = "127.0.0.1";
+			string tcpPackAddress = IPAddress.Any.ToString();
 			ushort tcpPackPort = 50007;
 			TcpPackServerMnger.GetInstance().Start(tcpPackAddress, tcpPackPort);
 		}

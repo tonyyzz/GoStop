@@ -3,6 +3,7 @@ using HPSocketCS;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -58,7 +59,7 @@ namespace GoStop.SubServer
 		{
 			Log.ConsoleWrite("-----------------OnConnect");
 			//连接主服务器成功后，启动WebSocket子服务器
-			string subWsAddress = "127.0.0.1";
+			string subWsAddress = "192.168.0.222";
 			ushort subWsPort = 50008;
 			bool isOnline = false;
 			var flag = SubWebSocketServerMnger.GetInstance().Start(subWsAddress, subWsPort, out subWsAddress, out subWsPort);

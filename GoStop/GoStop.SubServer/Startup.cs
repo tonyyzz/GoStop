@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -17,7 +18,7 @@ namespace GoStop.SubServer
 
 			PackageConfig.Register();
 
-			string tcpPackAddress = "127.0.0.1";
+			string tcpPackAddress = "192.168.0.222";
 			ushort TcpPackPort = 50007;
 			TcpPackClientMnger.GetInstance().Connect(tcpPackAddress, TcpPackPort);
 
